@@ -92,7 +92,7 @@ void initImage(AVFrame **image, int width, int height, int pixel_format,
   if (fill) {
     for (int y = 0; y < (*image)->height; y++) {
       for (int x = 0; x < (*image)->width; x++) {
-        setPixel(sheetBackground, x, y, *image);
+        setPixel(parameters->sheet_background, x, y, *image);
       }
     }
   }
@@ -264,7 +264,7 @@ void copyImageArea(const int x, const int y, const int width, const int height,
 static void centerImageArea(int x, int y, int w, int h, AVFrame *source,
                             int toX, int toY, int ww, int hh, AVFrame *target) {
   if ((w < ww) || (h < hh)) { // white rest-border will remain, so clear first
-    clearRect(toX, toY, toX + ww - 1, toY + hh - 1, target, sheetBackground);
+    clearRect(toX, toY, toX + ww - 1, toY + hh - 1, target, parameters->sheet_background);
   }
   if (w < ww) {
     toX += (ww - w) / 2;

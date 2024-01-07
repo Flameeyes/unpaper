@@ -1,0 +1,43 @@
+layout: LAYOUT_SINGLE
+startSheet: 1
+endSheet: -1
+startInput: -1
+startOutput: -1
+inputCount: 1
+outputCount: 1
+sheetBackground: 0xFFFFFF
+zoomFactor: 1.0
+postZoomFactor: 1.0
+blackfilterScanDirections: [DIRECTION_HORIZONTAL, DIRECTION_VERTICAL]
+blackfilterScanSize {horizontal: 20, vertical: 20}
+blackfilterScanDepth {horizontal: 500, vertical: 500}
+blackfilterScanStep {horizontal: 5, vertical: 5}
+blackfilterScanThreshold: 0.95
+blackfilterIntensity: 20
+noisefilterIntensity: 4
+blurfilterScanSize {horizontal: 100, vertical: 100}
+blurfilterScanStep {horizontal: 50, vertical: 50}
+blurfilterIntensity: 0.01
+grayfilterScanSize {horizontal: 50, vertical: 50}
+grayfilterScanStep {horizontal: 20, vertical: 20}
+grayfilterThreshold: 0.5
+maskScanDirections: [DIRECTION_HORIZONTAL]
+maskScanSize {horizontal: 50, vertical: 50}
+maskScanStep {horizontal: 5, vertical: 5}
+maskScanThreshold {horizontal: 0.1, vertical: 0.1}
+maskScanMinimum {width: 100, height: 100}
+maskColor: 0xFFFFFF
+deskewScanEdges: [EDGE_LEFT, EDGE_RIGHT]
+deskewScanSize: 1500
+deskewScanDepth: 0.5
+deskewScanRange: 5.0
+deskewScanStep: 0.1
+deskewScanDeviation: 1.0
+borderScanDirections: [DIRECTION_VERTICAL]
+borderScanSize {horizontal: 5, vertical: 5}
+borderScanStep {horizontal: 5, vertical: 5}
+borderScanThreshold {horizontal: 5, vertical: 5}
+whiteThreshold: 0.9
+blackThreshold: 0.33
+writeoutput: true
+multisheets: true

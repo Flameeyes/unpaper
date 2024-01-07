@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include "api/unpaper.pb-c.h"
+
 #define MAX_MULTI_INDEX                                                        \
   10000 // maximum pixel count of virtual line to detect rotation with
 #define MAX_ROTATION_SCAN_SIZE                                                 \
@@ -33,18 +35,18 @@ typedef enum { X, Y, COORDINATES_COUNT } COORDINATES;
 
 typedef enum { WIDTH, HEIGHT, DIMENSIONS_COUNT } DIMENSIONS;
 
-typedef enum { HORIZONTAL, VERTICAL, DIRECTIONS_COUNT } DIRECTIONS;
+#define HORIZONTAL DIRECTION__DIRECTION_HORIZONTAL
+#define VERTICAL DIRECTION__DIRECTION_VERTICAL
+#define DIRECTIONS_COUNT 2
 
 typedef enum { LEFT, TOP, RIGHT, BOTTOM, EDGES_COUNT } EDGES;
 
 typedef int Mask[EDGES_COUNT];
 
-typedef enum {
-  LAYOUT_NONE,
-  LAYOUT_SINGLE,
-  LAYOUT_DOUBLE,
-  LAYOUTS_COUNT
-} LAYOUTS;
+#define LAYOUT_NONE LAYOUT__LAYOUT_NONE
+#define LAYOUT_SINLE LAYOUT__LAYOUT_SINGLE
+#define LAYOUT_DOUBLE LAYOUT__LAYOUT_DOUBLE
+#define LAYOUT_COUNT 3
 
 typedef enum {
   INTERP_NN,

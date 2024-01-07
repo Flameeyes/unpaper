@@ -82,7 +82,8 @@ static int detectEdgeRotationPeak(float m, int shiftX, int shiftY,
   int lastBlackness = 0;
   int diff = 0;
   int maxDiff = 0;
-  int maxBlacknessAbs = 255 * deskewScanSize * deskewScanDepth;
+  int deskewScanSize = parameters->deskew_scan_size;
+  int maxBlacknessAbs = 255 * deskewScanSize * parameters->deskew_scan_depth;
   int maxDepth;
   int accumulatedBlackness = 0;
 
@@ -200,8 +201,13 @@ float detectRotation(AVFrame *image, Mask mask) {
   float total;
   float average;
   float deviation;
+  int selected_deskew_scan_edges = 0;
 
-  if ((deskewScanEdges & 1 << LEFT) != 0) {
+  for(size_t e = 0; e < parameters->n_deskew_scan_edges; e++) {
+    selected_deskew_scan_edges |= 1 << parameters->deskew_scan_edges[e];
+  }
+
+  if ((selected_deskew_scan_edges & 1 << LEFT) != 0) {
     // left
     rotation[count] = detectEdgeRotation(1, 0, image, mask);
     if (verbose >= VERBOSE_NORMAL) {
@@ -210,7 +216,7 @@ float detectRotation(AVFrame *image, Mask mask) {
     }
     count++;
   }
-  if ((deskewScanEdges & 1 << TOP) != 0) {
+  if ((selected_deskew_scan_edges & 1 << TOP) != 0) {
     // top
     rotation[count] = -detectEdgeRotation(0, 1, image, mask);
     if (verbose >= VERBOSE_NORMAL) {
@@ -219,7 +225,7 @@ float detectRotation(AVFrame *image, Mask mask) {
     }
     count++;
   }
-  if ((deskewScanEdges & 1 << RIGHT) != 0) {
+  if ((selected_deskew_scan_edges & 1 << RIGHT) != 0) {
     // right
     rotation[count] = detectEdgeRotation(-1, 0, image, mask);
     if (verbose >= VERBOSE_NORMAL) {
@@ -228,7 +234,7 @@ float detectRotation(AVFrame *image, Mask mask) {
     }
     count++;
   }
-  if ((deskewScanEdges & 1 << BOTTOM) != 0) {
+  if ((selected_deskew_scan_edges & 1 << BOTTOM) != 0) {
     // bottom
     rotation[count] = -detectEdgeRotation(0, -1, image, mask);
     if (verbose >= VERBOSE_NORMAL) {
@@ -669,9 +675,9 @@ void detectMasks(AVFrame *image) {
 
   maskCount = 0;
   if (maskScanDirections != 0) {
-    for (int i = 0; i < pointCount; i++) {
+    for (int i = 0; i < parameters->n_point; i++) {
       maskValid[i] = detectMask(
-          point[i][X], point[i][Y], maskScanDirections, maskScanSize,
+          parameters->point[i].x, parameters->point[i].y, maskScanDirections, maskScanSize,
           maskScanDepth, maskScanStep, maskScanThreshold, maskScanMinimum,
           maskScanMaximum, &left, &top, &right, &bottom, image);
       if (!(left == -1 || top == -1 || right == -1 || bottom == -1)) {

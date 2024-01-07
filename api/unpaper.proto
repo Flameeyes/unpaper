@@ -1,0 +1,131 @@
+// SPDX-FileCopyrightText: 2023 The unpaper authors
+//
+// SPDX-License-Identifier: MIT
+
+syntax = "proto3";
+
+enum Layout {
+    LAYOUT_NONE = 0;
+    LAYOUT_SINGLE = 1;
+    LAYOUT_DOUBLE = 2;
+}
+
+enum Direction {
+    DIRECTION_UNKNOWN = 0;
+    DIRECTION_HORIZONTAL = 1;
+    DIRECTION_VERTICAL = 2;
+}
+
+enum Edge {
+    EDGE_UNKNOWN = 0;
+    EDGE_LEFT = 1;
+    EDGE_TOP = 2;
+    EDGE_RIGHT = 3;
+    EDGE_BOTTOM = 4;
+}
+
+message CoordinateInt32 {
+    int32 x = 1;
+    int32 y = 2;
+}
+
+message DimensionInt32 {
+    int32 width = 1;
+    int32 height = 2;
+}
+
+message DirectionInt32 {
+    int32 horizontal = 1;
+    int32 vertical = 2;
+}
+
+message DirectionFloat {
+    float horizontal = 1;
+    float vertical = 2;
+}
+
+message EdgeInt32 {
+    int32 left = 1;
+    int32 top = 2;
+    int32 right = 3;
+    int32 bottom = 4;
+}
+
+message MiddleWipe {
+    int32 left = 1;
+    int32 right = 2;
+}
+
+message JobParameters {
+    Layout layout = 1;
+    int32 start_sheet = 2;
+    int32 end_sheet = 3;
+    int32 start_input = 4;
+    int32 start_output = 5;
+    int32 input_count = 6;
+    int32 output_count = 7;
+    DimensionInt32 sheet_size = 8;
+    int32 sheet_background = 9;
+    int32 pre_rotate = 10;
+    int32 post_rotate = 11;
+    int32 pre_mirror = 12;
+    int32 post_mirror = 13;
+    DirectionInt32 pre_shift = 14;
+    DirectionInt32 post_shift = 15;
+    DimensionInt32 size = 16;
+    DimensionInt32 post_size = 17;
+    DimensionInt32 stretch_size = 18;
+    DimensionInt32 post_stretch_size = 19;
+    float zoom_factor = 20;
+    float post_zoom_factor = 21;
+    repeated CoordinateInt32 point = 22;
+    repeated EdgeInt32 mask = 23;
+    repeated EdgeInt32 wipe = 24;
+    MiddleWipe middle_wipe = 25;
+    repeated EdgeInt32 pre_wipe = 26;
+    repeated EdgeInt32 post_wipe = 27;
+    EdgeInt32 pre_border = 28;
+    EdgeInt32 post_border = 29;
+    EdgeInt32 border = 30;
+    repeated bool mask_valid = 31;
+    repeated EdgeInt32 pre_mask = 32;
+    repeated Direction blackfilter_scan_directions = 33;
+    DirectionInt32 blackfilter_scan_size = 34;
+    DirectionInt32 blackfilter_scan_depth = 35;
+    DirectionInt32 blackfilter_scan_step = 36;
+    float blackfilter_scan_threshold = 37;
+    repeated EdgeInt32 blackfilter_exclude = 38;
+    int32 blackfilter_intensity = 39;
+    int32 noisefilter_intensity = 40;
+    DirectionInt32 blurfilter_scan_size = 41;
+    DirectionInt32 blurfilter_scan_step = 42;
+    float blurfilter_intensity = 43;
+    DirectionInt32 grayfilter_scan_size = 44;
+    DirectionInt32 grayfilter_scan_step = 45;
+    float grayfilter_threshold = 46;
+    repeated Direction mask_scan_directions = 47;
+    DirectionInt32 mask_scan_size = 48;
+    DirectionInt32 mask_scan_depth = 49;
+    DirectionInt32 mask_scan_step = 50;
+    DirectionFloat mask_scan_threshold = 51;
+    DimensionInt32 mask_scan_minimum = 52;
+    DimensionInt32 mask_scan_maximum = 53;
+    int32 mask_color = 54;
+    repeated Edge deskew_scan_edges = 55;
+    sint32 deskew_scan_size = 56;
+    float deskew_scan_depth = 57;
+    float deskew_scan_range = 58;
+    float deskew_scan_step = 59;
+    float deskew_scan_deviation = 60;
+    repeated Direction border_scan_directions = 61;
+    DirectionInt32 border_scan_size = 62;
+    DirectionInt32 border_scan_step = 63;
+    DirectionInt32 border_scan_threshold = 64;
+    int32 border_align = 65;
+    DirectionInt32 border_align_margin = 66;
+    repeated EdgeInt32 outside_borderscan_mask = 67;
+    float white_threshold = 68;
+    float black_threshold = 69;
+    bool write_output = 70;
+    bool multi_sheets = 71;
+}

@@ -15,6 +15,8 @@
 
 #include "constants.h"
 
+#include "api/unpaper.pb-c.h"
+
 /* --- preprocessor macros ------------------------------------------------ */
 
 #define pluralS(i) ((i > 1) ? "s" : "")
@@ -23,6 +25,8 @@ void errOutput(const char *fmt, ...) __attribute__((format(printf, 1, 2)))
 __attribute__((noreturn));
 
 /* --- global variable ---------------------------------------------------- */
+
+extern JobParameters *parameters;
 
 extern VERBOSE_LEVEL verbose;
 extern INTERP_FUNCTIONS interpolateType;
@@ -34,86 +38,6 @@ extern unsigned int absGrayfilterThreshold;
 extern float deskewScanRangeRad;
 extern float deskewScanStepRad;
 extern float deskewScanDeviationRad;
-
-extern int layout;
-extern int startSheet;
-extern int endSheet;
-extern int startInput;
-extern int startOutput;
-extern int inputCount;
-extern int outputCount;
-extern int sheetSize[DIMENSIONS_COUNT];
-extern int sheetBackground;
-extern int preRotate;
-extern int postRotate;
-extern int preMirror;
-extern int postMirror;
-extern int preShift[DIRECTIONS_COUNT];
-extern int postShift[DIRECTIONS_COUNT];
-extern int size[DIRECTIONS_COUNT];
-extern int postSize[DIRECTIONS_COUNT];
-extern int stretchSize[DIRECTIONS_COUNT];
-extern int postStretchSize[DIRECTIONS_COUNT];
-extern float zoomFactor;
-extern float postZoomFactor;
-extern int pointCount;
-extern int point[MAX_POINTS][COORDINATES_COUNT];
-extern int maskCount;
-extern int mask[MAX_MASKS][EDGES_COUNT];
-extern int wipeCount;
-extern int wipe[MAX_MASKS][EDGES_COUNT];
-extern int middleWipe[2];
-extern int preWipeCount;
-extern int preWipe[MAX_MASKS][EDGES_COUNT];
-extern int postWipeCount;
-extern int postWipe[MAX_MASKS][EDGES_COUNT];
-extern int preBorder[EDGES_COUNT];
-extern int postBorder[EDGES_COUNT];
-extern int border[EDGES_COUNT];
-extern bool maskValid[MAX_MASKS];
-extern int preMaskCount;
-extern int preMask[MAX_MASKS][EDGES_COUNT];
-extern int blackfilterScanDirections;
-extern int blackfilterScanSize[DIRECTIONS_COUNT];
-extern int blackfilterScanDepth[DIRECTIONS_COUNT];
-extern int blackfilterScanStep[DIRECTIONS_COUNT];
-extern float blackfilterScanThreshold;
-extern int blackfilterExcludeCount;
-extern int blackfilterExclude[MAX_MASKS][EDGES_COUNT];
-extern int blackfilterIntensity;
-extern int noisefilterIntensity;
-extern int blurfilterScanSize[DIRECTIONS_COUNT];
-extern int blurfilterScanStep[DIRECTIONS_COUNT];
-extern float blurfilterIntensity;
-extern int grayfilterScanSize[DIRECTIONS_COUNT];
-extern int grayfilterScanStep[DIRECTIONS_COUNT];
-extern float grayfilterThreshold;
-extern int maskScanDirections;
-extern int maskScanSize[DIRECTIONS_COUNT];
-extern int maskScanDepth[DIRECTIONS_COUNT];
-extern int maskScanStep[DIRECTIONS_COUNT];
-extern float maskScanThreshold[DIRECTIONS_COUNT];
-extern int maskScanMinimum[DIMENSIONS_COUNT];
-extern int maskScanMaximum[DIMENSIONS_COUNT]; // set default later
-extern int maskColor;
-extern int deskewScanEdges;
-extern int deskewScanSize;
-extern float deskewScanDepth;
-extern float deskewScanRange;
-extern float deskewScanStep;
-extern float deskewScanDeviation;
-extern int borderScanDirections;
-extern int borderScanSize[DIRECTIONS_COUNT];
-extern int borderScanStep[DIRECTIONS_COUNT];
-extern int borderScanThreshold[DIRECTIONS_COUNT];
-extern int borderAlign;                                   // center
-extern int borderAlignMargin[DIRECTIONS_COUNT];           // center
-extern int outsideBorderscanMask[MAX_PAGES][EDGES_COUNT]; // set by --layout
-extern int outsideBorderscanMaskCount;
-extern float whiteThreshold;
-extern float blackThreshold;
-extern bool writeoutput;
-extern bool multisheets;
 
 extern struct MultiIndex noBlackfilterMultiIndex;
 extern struct MultiIndex noNoisefilterMultiIndex;
